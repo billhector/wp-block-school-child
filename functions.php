@@ -37,3 +37,28 @@ add_action(
 	},
 	20
 );
+
+/**
+ * Register pattern categories for the wpbs/* patterns.
+ *
+ * Categories scope where patterns appear in the editor's Patterns panel.
+ * All wpbs patterns prefix their category slugs with `wpbs-` so they group
+ * together and don't collide with parent-theme or core categories.
+ */
+add_action(
+	'init',
+	static function (): void {
+		register_block_pattern_category(
+			'wpbs-marketing',
+			array( 'label' => __( 'WP Block School — Marketing', 'wp-block-school' ) )
+		);
+		register_block_pattern_category(
+			'wpbs-course',
+			array( 'label' => __( 'WP Block School — Course', 'wp-block-school' ) )
+		);
+		register_block_pattern_category(
+			'wpbs-structural',
+			array( 'label' => __( 'WP Block School — Structural', 'wp-block-school' ) )
+		);
+	}
+);
