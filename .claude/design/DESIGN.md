@@ -225,11 +225,43 @@ theme.json defaults:
 - Module-complete checkmark uses `accent` (teal).
 - Lesson list bullets use `secondary` (orange).
 
+## Brand mark + wordmark
+
+Locked 2026-06-09. Source files in `assets/brand/`.
+
+### Wordmark
+
+- **Text:** WP BLOCK SCHOOL (always uppercase)
+- **Font:** Inter 900
+- **Color:** `primary` (#0f172a slate) on light bg; `background` (#fafaf9 warm white) on dark bg
+- **Tracking:** `-0.01em` (header) / `-0.02em` (display sizes / footer hero)
+- **Layout:** inline single-line in header nav; stacked 3-line in footer hero treatment
+- **Rendered, not imaged:** the wordmark is set in live Inter via `core/site-title` block. Do NOT use a wordmark SVG/PNG — the live type stays crisp at every size and inherits the type system.
+
+### Mark (icon / favicon)
+
+- **Concept:** 3×3 grid of rounded squares. 8 slate squares + the center square in burnt orange. Reads as block-editor metaphor plus "find the right block."
+- **Files:**
+  - `assets/brand/mark.svg` — primary (slate squares + orange center) for light backgrounds. 100×100 viewBox.
+  - `assets/brand/mark-dark.svg` — inverted (warm-white squares + orange center) for dark backgrounds.
+  - `assets/brand/favicon.svg` — slightly tighter grid + 4px corner radius for 16px-favicon legibility. Wired via `functions.php` → `wp_head`.
+- **Sizes:**
+  - Header: 28×28
+  - Footer corner (if used): 24×24
+  - Favicon: SVG (browser scales)
+  - App icon / OG image: render at 512×512 from `mark.svg`
+- **Don't:** add drop shadows, gradients, animation, or recolor the orange to anything else. The orange-on-slate contrast IS the mark.
+
+### Combined lockup
+
+- **Default:** mark (28×28) + 12px gap + wordmark inline. Used in site header.
+- **Mark-only:** favicon, app icon, social avatar.
+- **Wordmark-only:** footer hero, email footer, business cards.
+
 ## Imagery + iconography
 
 - **Photography:** real photos only. No stock. If no real photo available, use a colored block w/ icon (Phosphor or Heroicons).
 - **Icons:** Phosphor Icons (woff2 icon font self-hosted, ~80KB) OR inline SVG per icon. Decide during sales-page build.
-- **Logo:** "WP Block School" wordmark, custom-set in Inter 700. No logomark for v1.
 - **Illustrations:** none for cohort #1. Hero proof-bar uses real numbers in plain HTML.
 
 ## Accessibility
@@ -272,3 +304,4 @@ You can invoke these via the Skill tool when needed:
 
 - `2026-06-09` — Initial lock. Palette: Slate + Burnt Orange + Teal. Type: Inter + JetBrains Mono. Spacing + radii defined. Child theme `wp-block-school-child` created with `theme.json` wiring these tokens.
 - `2026-06-09` (update) — Replaced TTF + fontsource downloads with Bill's static woff2 set (Inter 400/400i/700/700i/900 + JetBrains Mono 400, all latin subset, ~144KB total). Heading weight rule locked: H1 = 900, H2–H6 = 700.
+- `2026-06-09` (brand mark) — Locked wordmark (WP BLOCK SCHOOL uppercase, Inter 900, type-rendered not imaged) + mark (3×3 grid, 8 slate + center orange, 4px corner radius). Files in `assets/brand/`: `mark.svg`, `mark-dark.svg`, `favicon.svg`. Favicon wired via functions.php `wp_head` action. Header now shows mark + wordmark lockup; footer keeps wordmark-only.

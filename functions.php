@@ -39,6 +39,21 @@ add_action(
 );
 
 /**
+ * Inject SVG favicon link into <head>.
+ *
+ * Modern browsers prefer SVG favicons (one file, infinite resolution).
+ * Priority 1 runs before most plugins / parent theme so the icon shows up consistently.
+ */
+add_action(
+	'wp_head',
+	static function (): void {
+		$favicon_uri = get_stylesheet_directory_uri() . '/assets/brand/favicon.svg';
+		echo '<link rel="icon" type="image/svg+xml" href="' . esc_url( $favicon_uri ) . '">' . "\n";
+	},
+	1
+);
+
+/**
  * Register pattern categories for the wpbs/* patterns.
  *
  * Categories scope where patterns appear in the editor's Patterns panel.

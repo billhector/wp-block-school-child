@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="WP Block School">
+  <title>WP Block School</title>
+  <!-- Inverted variant for dark backgrounds: warm-white squares + orange center. -->
+  <!-- Row 1 -->
+  <rect x="1"  y="1"  width="30" height="30" rx="3" fill="#fafaf9"/>
+  <rect x="35" y="1"  width="30" height="30" rx="3" fill="#fafaf9"/>
+  <rect x="69" y="1"  width="30" height="30" rx="3" fill="#fafaf9"/>
+  <!-- Row 2 (center accent stays orange) -->
+  <rect x="1"  y="35" width="30" height="30" rx="3" fill="#fafaf9"/>
+  <rect x="35" y="35" width="30" height="30" rx="3" fill="#ea580c"/>
+  <rect x="69" y="35" width="30" height="30" rx="3" fill="#fafaf9"/>
+  <!-- Row 3 -->
+  <rect x="1"  y="69" width="30" height="30" rx="3" fill="#fafaf9"/>
+  <rect x="35" y="69" width="30" height="30" rx="3" fill="#fafaf9"/>
+  <rect x="69" y="69" width="30" height="30" rx="3" fill="#fafaf9"/>
+</svg>
