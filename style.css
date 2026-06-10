@@ -1,0 +1,14 @@
+/*
+Theme Name: WP Block School (Course Child)
+Template: course
+Author: Bill Hector
+Author URI: https://wpblockschool.com
+Description: Child theme of the Sensei Course theme for wpblockschool.com. Overrides palette, typography, and spacing via theme.json. Parent stays untouched so Sensei updates ship safely.
+Version: 0.1.0
+Requires at least: 6.3
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: wp-block-school
+Tags: block-patterns, education, full-site-editing, lms, sensei
+*/
