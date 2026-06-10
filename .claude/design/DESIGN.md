@@ -227,7 +227,21 @@ theme.json defaults:
 
 ## Brand mark + wordmark
 
-Locked 2026-06-09. Source files in `assets/brand/`.
+Locked 2026-06-09. **v2 lockup files added 2026-06-10** — see "Brand assets v2 (active)" below. Per-spec rendering rules (Wordmark / Mark / Combined lockup) in this section describe the original v1 system and are preserved for context until the next full design pass supersedes them.
+
+### Brand assets v2 (active)
+
+Single SVG lockup file pair (mark + wordmark combined), fonts converted to paths so no live-font dependency:
+
+- `assets/brand/wpbs-logo.svg` — primary lockup for light backgrounds. viewBox `0 0 1000 311` (~3.22:1). Fill `#0F172A`.
+- `assets/brand/wpbs-logo-reverse.svg` — inverted lockup for dark backgrounds. Fill `#fafaf9`.
+- `assets/brand/wpbs-og.jpg` — site-wide OG image, 1200×630, JPEG. Background sampled `#0F172A` (matches `primary`). Wired via `functions.php` → `wp_head` priority 5 → emits `og:image`, `twitter:image`, `twitter:card`.
+
+Header lockup width: 160px (height auto from viewBox ≈ 50px). Footer keeps text-rendered "WP Block School" h4 + tagline until/unless wordmark-only SVG is added.
+
+Favicons: PNG/ICO stack in `assets/icons/` only — no SVG favicon (v1 `favicon.svg` removed). Manifest at `assets/icons/site.webmanifest`.
+
+**Export gotcha:** the source export from claude.ai/design drifted `#0F172A` → `#021026` (sRGB / color-profile conversion). Fixed in-tree via search-replace 2026-06-10. If re-exporting from the design tool, verify the SVG fill matches `#0F172A` before committing. TinyPNG was NOT the culprit — the drift exists in the pre-optimization export too.
 
 ### Wordmark
 
@@ -257,6 +271,22 @@ Locked 2026-06-09. Source files in `assets/brand/`.
 - **Default:** mark (28×28) + 12px gap + wordmark inline. Used in site header.
 - **Mark-only:** favicon, app icon, social avatar.
 - **Wordmark-only:** footer hero, email footer, business cards.
+
+### Tagline
+
+- **Locked:** "The page-builder exit plan." (2026-06-10)
+- **Casing:** sentence case w/ terminal period. Always rendered with the period — the period is part of the line.
+- **Use:**
+  - WP `blogdescription` (Site Identity → tagline)
+  - OG image subtitle (under wordmark)
+  - Footer mark-block, under wordmark
+  - Email signature line
+  - Meta description fallback
+- **Don't:**
+  - Substitute "Elementor" for "page-builder" on brand-prominent surfaces (lockup, OG, footer). Body copy + sales-page H2 may name Elementor freely under nominative fair use.
+  - Append exclamation marks or hype words.
+  - Translate into a different positioning ("page-builder freedom plan", "page-builder migration kit", etc.) — exact wording is part of the brand.
+- **Type pairing:** Inter 500 italic on light bg, Inter 500 italic on dark bg. ~70% size of wordmark when stacked beneath. Color: `text` muted (`#475569` on light, `#cbd5e1` on dark).
 
 ## Imagery + iconography
 

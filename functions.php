@@ -39,18 +39,47 @@ add_action(
 );
 
 /**
- * Inject SVG favicon link into <head>.
+ * Inject favicon + PWA icon links into <head>.
  *
- * Modern browsers prefer SVG favicons (one file, infinite resolution).
- * Priority 1 runs before most plugins / parent theme so the icon shows up consistently.
+ * PNG + .ico cover all browsers; apple-touch-icon for iOS home-screen shortcuts.
+ * Web manifest declares PWA install metadata and Android theme color.
+ * Priority 1 runs before most plugins / parent theme so icons resolve consistently.
  */
 add_action(
 	'wp_head',
 	static function (): void {
-		$favicon_uri = get_stylesheet_directory_uri() . '/assets/brand/favicon.svg';
-		echo '<link rel="icon" type="image/svg+xml" href="' . esc_url( $favicon_uri ) . '">' . "\n";
+		$icons = get_stylesheet_directory_uri() . '/assets/icons';
+
+		echo '<link rel="icon" type="image/png" sizes="32x32" href="' . esc_url( $icons . '/favicon-32x32.png' ) . '">' . "\n";
+		echo '<link rel="icon" type="image/png" sizes="16x16" href="' . esc_url( $icons . '/favicon-16x16.png' ) . '">' . "\n";
+		echo '<link rel="shortcut icon" href="' . esc_url( $icons . '/favicon.ico' ) . '">' . "\n";
+		echo '<link rel="apple-touch-icon" sizes="180x180" href="' . esc_url( $icons . '/apple-touch-icon.png' ) . '">' . "\n";
+		echo '<link rel="manifest" href="' . esc_url( $icons . '/site.webmanifest' ) . '">' . "\n";
+		echo '<meta name="theme-color" content="#0f172a">' . "\n";
 	},
 	1
+);
+
+/**
+ * Inject default Open Graph + Twitter image for pages without per-page overrides.
+ *
+ * Rank Math (or any SEO plugin) will override these on pages where the user sets
+ * a specific OG image; this hook only fills the site-wide fallback. Runs at
+ * priority 5 — early enough to be picked up by social-share crawlers, late enough
+ * that any plugin priority-default (10) overrides take precedence.
+ */
+add_action(
+	'wp_head',
+	static function (): void {
+		$og_url = get_stylesheet_directory_uri() . '/assets/brand/wpbs-og.jpg';
+		echo '<meta property="og:image" content="' . esc_url( $og_url ) . '">' . "\n";
+		echo '<meta property="og:image:width" content="1200">' . "\n";
+		echo '<meta property="og:image:height" content="630">' . "\n";
+		echo '<meta property="og:image:type" content="image/jpeg">' . "\n";
+		echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+		echo '<meta name="twitter:image" content="' . esc_url( $og_url ) . '">' . "\n";
+	},
+	5
 );
 
 /**
