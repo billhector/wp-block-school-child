@@ -12,3 +12,104 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wp-block-school
 Tags: block-patterns, education, full-site-editing, lms, sensei
 */
+
+/* ============================================================
+   Brand lockup — pin by height for consistent physical size
+   across every surface (marketing header, dashboard top bar,
+   page headers). 45px tall keeps the wordmark at one rhythm
+   regardless of viewBox width. Footer uses the reverse mark.
+   ============================================================ */
+.wpbs-header .wpbs-logo-link img {
+	height: 45px;
+	width: auto;
+	display: block;
+}
+
+.wpbs-footer .wpbs-logo-link--footer img {
+	height: 45px;
+	width: auto;
+	max-width: 150px;
+	display: block;
+}
+
+/* ============================================================
+   Hero — default page (left text · floating featured image)
+   Stacked-block accents echo the logomark motif. The figure
+   wrapper is positioned; ::before is the burnt-orange filled
+   block behind the image's bottom-right, ::after is the teal
+   outlined block at the top-left.
+   ============================================================ */
+.wpbs-hero-page__figure {
+	position: relative;
+}
+
+.wpbs-hero-page__figure::before,
+.wpbs-hero-page__figure::after {
+	content: "";
+	position: absolute;
+	z-index: 0;
+	border-radius: 12px;
+	pointer-events: none;
+}
+
+.wpbs-hero-page__figure::before {
+	inset: auto -18px -18px auto;
+	width: 64%;
+	height: 70%;
+	background: var(--wp--preset--color--secondary);
+}
+
+.wpbs-hero-page__figure::after {
+	inset: -16px auto auto -16px;
+	width: 44%;
+	height: 40%;
+	border: 2px solid var(--wp--preset--color--accent);
+}
+
+.wpbs-hero-page__figure .wp-block-post-featured-image {
+	position: relative;
+	z-index: 1;
+	margin: 0;
+	border-radius: 12px;
+	box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+	overflow: hidden;
+}
+
+.wpbs-hero-page__figure .wp-block-post-featured-image img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 12px;
+}
+
+/* ============================================================
+   Hero — blog post (centered text · wide 16:9 featured image)
+   ============================================================ */
+.wpbs-hero-blog__figure-wrap .wpbs-hero-blog__figure {
+	margin: 0;
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+	overflow: hidden;
+}
+
+.wpbs-hero-blog__figure img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 12px;
+}
+
+/* ============================================================
+   Responsive — page hero collapses to one column at <= 860px
+   ============================================================ */
+@media (max-width: 860px) {
+	.wpbs-hero-page__figure {
+		max-width: 460px;
+		margin-inline: auto;
+	}
+
+	.wpbs-hero-page__figure .wp-block-post-featured-image,
+	.wpbs-hero-page__figure .wp-block-post-featured-image img {
+		aspect-ratio: 3 / 2;
+	}
+}
