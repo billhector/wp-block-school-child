@@ -108,68 +108,18 @@ add_action(
 );
 
 /**
- * Register Meta Box custom fields.
- *
- * Two separate field groups (pages vs posts) so the schemas can diverge —
- * blog posts will likely accrete fields (TL;DR, reading time, code-snippet
- * intro) that don't make sense on marketing pages.
- *
- * Field IDs are reused across groups when they mean the same thing (e.g.
- * `subhead`); they're stored as separate post meta because they're on
- * different post types — no collision.
- *
- * Requires the Meta Box plugin (rilwis/meta-box). Filter is a no-op when
- * the plugin is inactive.
- */
-add_filter(
-	'rwmb_meta_boxes',
-	static function ( array $meta_boxes ): array {
-		$meta_boxes[] = array(
-			'title'      => __( 'Page details', 'wp-block-school' ),
-			'id'         => 'wpbs_page_details',
-			'post_types' => array( 'page' ),
-			'context'    => 'normal',
-			'priority'   => 'high',
-			'fields'     => array(
-				array(
-					'id'    => 'subhead',
-					'name'  => __( 'Subhead', 'wp-block-school' ),
-					'type'  => 'text',
-					'desc'  => __( 'Lead subhead under the H1 in the page hero. Overrides the post excerpt in hero rendering.', 'wp-block-school' ),
-					'size'  => 80,
-				),
-			),
-		);
-
-		$meta_boxes[] = array(
-			'title'      => __( 'Post details', 'wp-block-school' ),
-			'id'         => 'wpbs_post_details',
-			'post_types' => array( 'post' ),
-			'context'    => 'normal',
-			'priority'   => 'high',
-			'fields'     => array(
-				array(
-					'id'    => 'subhead',
-					'name'  => __( 'Subhead', 'wp-block-school' ),
-					'type'  => 'text',
-					'desc'  => __( 'Lead subhead under the H1 in the blog hero. Overrides the post excerpt in hero rendering.', 'wp-block-school' ),
-					'size'  => 80,
-				),
-			),
-		);
-
-		return $meta_boxes;
-	}
-);
-
-/**
- * When a `subhead` post meta is set, surface it as the excerpt so the existing
+ * Surface the Meta Box `subhead` field as the post excerpt so the existing
  * wp:post-excerpt blocks in templates/page.html and patterns/hero-blog.php
  * render it without any template change. Empty subhead falls through to the
  * native post_excerpt.
  *
+ * Field groups themselves are managed through the MB Builder UI in the WP
+ * admin (Meta Box → Custom Fields), not via this file. This filter only cares
+ * that the field ID is `subhead`; group naming, post-type targeting, and any
+ * additional fields are configured visually.
+ *
  * Priority 9 runs before WordPress's default formatters at priority 10 — keeps
- * our subhead text unfiltered until WP's standard pipeline picks it up.
+ * the subhead text unfiltered until WP's standard pipeline picks it up.
  */
 add_filter(
 	'get_the_excerpt',
