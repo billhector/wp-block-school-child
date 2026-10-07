@@ -44,7 +44,7 @@
         {
           "slug": "secondary-dark",
           "color": "#9a3412",
-          "name": "Secondary Dark"
+          "name": "Secondary Dark (Link Color)"
         },
         {
           "slug": "accent",
@@ -63,8 +63,8 @@
         },
         {
           "slug": "text",
-          "color": "#1e293b",
-          "name": "Text"
+          "color": "#2e2e2e",
+          "name": "Text (Warm Charcoal)"
         },
         {
           "slug": "text-muted",
@@ -73,8 +73,8 @@
         },
         {
           "slug": "background",
-          "color": "#fafaf9",
-          "name": "Background (Warm White)"
+          "color": "#f2f0e3",
+          "name": "Background (Warm Cream)"
         },
         {
           "slug": "background-subtle",
@@ -83,8 +83,8 @@
         },
         {
           "slug": "border",
-          "color": "#e7e5e4",
-          "name": "Border"
+          "color": "#dcd5bf",
+          "name": "Border (Light Tan)"
         },
         {
           "slug": "danger",
@@ -172,7 +172,7 @@
         }
       ],
       "fontSizes": [
-        { "slug": "xs",    "size": "clamp(0.75rem, 0.71rem + 0.18vw, 0.875rem)",  "name": "XS",   "fluid": false },
+        { "slug": "xs",    "size": "clamp(0.75rem, 0.71rem + 0.18vw, 0.875rem)",  "name": "XS (deprecated)", "fluid": false },
         { "slug": "sm",    "size": "clamp(0.875rem, 0.83rem + 0.21vw, 1rem)",      "name": "SM",   "fluid": false },
         { "slug": "base",  "size": "clamp(1rem, 0.95rem + 0.24vw, 1.125rem)",      "name": "Base", "fluid": false },
         { "slug": "lg",    "size": "clamp(1.125rem, 1.05rem + 0.36vw, 1.375rem)",  "name": "LG",   "fluid": false },
@@ -180,7 +180,9 @@
         { "slug": "2xl",   "size": "clamp(1.5rem, 1.31rem + 0.94vw, 2rem)",        "name": "2XL",  "fluid": false },
         { "slug": "3xl",   "size": "clamp(1.875rem, 1.55rem + 1.62vw, 2.625rem)",  "name": "3XL",  "fluid": false },
         { "slug": "4xl",   "size": "clamp(2.25rem, 1.78rem + 2.35vw, 3.375rem)",   "name": "4XL",  "fluid": false },
-        { "slug": "5xl",   "size": "clamp(2.75rem, 2.08rem + 3.35vw, 4.25rem)",    "name": "5XL",  "fluid": false }
+        { "slug": "5xl",   "size": "clamp(2.75rem, 2.08rem + 3.35vw, 4.25rem)",    "name": "5XL",  "fluid": false },
+        { "slug": "6xl",   "size": "clamp(3.375rem, 2.55rem + 4.11vw, 5.25rem)",   "name": "6XL",  "fluid": false },
+        { "slug": "7xl",   "size": "clamp(4.125rem, 3.12rem + 5.02vw, 6.5rem)",    "name": "7XL",  "fluid": false }
       ]
     },
     "spacing": {
@@ -291,11 +293,11 @@
       },
       "link": {
         "color": {
-          "text": "var(--wp--preset--color--secondary)"
+          "text": "var(--wp--preset--color--secondary-dark)"
         },
         ":hover": {
           "color": {
-            "text": "var(--wp--preset--color--secondary-dark)"
+            "text": "var(--wp--preset--color--primary)"
           }
         }
       },
@@ -305,7 +307,7 @@
           "text": "var(--wp--preset--color--background)"
         },
         "border": {
-          "radius": "4px",
+          "radius": "8px",
           "width": "0"
         },
         "spacing": {

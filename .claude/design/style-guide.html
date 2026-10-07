@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WP Block School — Style Guide (2026-06-12)</title>
+<style>
+  /* Self-hosted Inter — paths relative to this file at .claude/design/ */
+  @font-face { font-family: Inter; font-weight: 400; font-style: normal; font-display: swap;
+    src: url("../../assets/fonts/inter-v20-latin-regular.woff2") format("woff2"); }
+  @font-face { font-family: Inter; font-weight: 400; font-style: italic; font-display: swap;
+    src: url("../../assets/fonts/inter-v20-latin-italic.woff2") format("woff2"); }
+  @font-face { font-family: Inter; font-weight: 700; font-style: normal; font-display: swap;
+    src: url("../../assets/fonts/inter-v20-latin-700.woff2") format("woff2"); }
+  @font-face { font-family: Inter; font-weight: 700; font-style: italic; font-display: swap;
+    src: url("../../assets/fonts/inter-v20-latin-700italic.woff2") format("woff2"); }
+  @font-face { font-family: Inter; font-weight: 900; font-style: normal; font-display: swap;
+    src: url("../../assets/fonts/inter-v20-latin-900.woff2") format("woff2"); }
+  @font-face { font-family: "JetBrains Mono"; font-weight: 400; font-style: normal; font-display: swap;
+    src: url("../../assets/fonts/jetbrains-mono-v24-latin-regular.woff2") format("woff2"); }
+
+  :root {
+    /* COLORS — current locked palette w/ 2026-06-12 evolution applied */
+    --primary: #0f172a;
+    --primary-light: #334155;
+    --primary-dark: #020617;
+    --secondary: #ea580c;
+    --secondary-light: #fb923c;
+    --secondary-dark: #9a3412;     /* NEW role: body link color */
+    --accent: #14b8a6;
+    --accent-light: #5eead4;
+    --accent-dark: #0f766e;
+    --text: #2e2e2e;
+    --text-muted: #475569;
+    --background: #f2f0e3;
+    --background-subtle: #f5f5f4;
+    --border: #dcd5bf;             /* NEW — was #e7e5e4 grey */
+    --danger: #dc2626;
+    --code-bg: #0f172a;
+    --code-text: #e2e8f0;
+
+    /* TYPE SCALE — fluid clamp, 17px root */
+    --text-xs:   clamp(0.75rem, 0.71rem + 0.18vw, 0.875rem);  /* DEPRECATED */
+    --text-sm:   clamp(0.875rem, 0.83rem + 0.21vw, 1rem);
+    --text-base: clamp(1rem, 0.95rem + 0.24vw, 1.125rem);
+    --text-lg:   clamp(1.125rem, 1.05rem + 0.36vw, 1.375rem);
+    --text-xl:   clamp(1.25rem, 1.13rem + 0.59vw, 1.625rem);
+    --text-2xl:  clamp(1.5rem, 1.31rem + 0.94vw, 2rem);
+    --text-3xl:  clamp(1.875rem, 1.55rem + 1.62vw, 2.625rem);
+    --text-4xl:  clamp(2.25rem, 1.78rem + 2.35vw, 3.375rem);
+    --text-5xl:  clamp(2.75rem, 2.08rem + 3.35vw, 4.25rem);
+    --text-6xl:  clamp(3.375rem, 2.55rem + 4.11vw, 5.25rem);
+    --text-7xl:  clamp(4.125rem, 3.12rem + 5.02vw, 6.5rem);
+
+    /* SPACING — locked rem-direct scale */
+    --space-10: 0.25rem;
+    --space-20: 0.5rem;
+    --space-30: 0.75rem;
+    --space-40: 1rem;
+    --space-50: 1.5rem;
+    --space-60: 2rem;
+    --space-70: 3rem;
+    --space-80: 4rem;
+    --space-90: 5rem;
+    --space-100: 7rem;
+
+    /* RADII */
+    --r-sm: 4px;
+    --r-md: 8px;    /* now also = button radius (updated 2026-06-12) */
+    --r-lg: 12px;
+    --r-xl: 16px;
+    --r-2xl: 24px;
+    --r-full: 9999px;
+  }
+
+  html { font-size: 17px; }
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+    font-size: var(--text-base);
+    line-height: 1.6;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: var(--space-70) var(--space-50); }
+  .nav-bar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-30) var(--space-50);
+    display: flex; flex-wrap: wrap; gap: var(--space-30);
+    font-size: var(--text-sm); font-weight: 600;
+  }
+  .nav-bar a { color: var(--primary); text-decoration: none; }
+  .nav-bar a:hover { color: var(--secondary-dark); }
+
+  section { border-top: 1px solid var(--border); padding: var(--space-70) 0; }
+  section:first-of-type { border-top: 0; padding-top: var(--space-40); }
+  h1 { font-weight: 900; font-size: var(--text-5xl); letter-spacing: -0.02em; line-height: 1.1; color: var(--primary); margin: 0 0 var(--space-40); }
+  h2 { font-weight: 700; font-size: var(--text-3xl); letter-spacing: -0.01em; line-height: 1.2; color: var(--primary); margin: 0 0 var(--space-40); }
+  h3 { font-weight: 700; font-size: var(--text-2xl); line-height: 1.3; color: var(--primary); margin: var(--space-50) 0 var(--space-30); }
+  h4 { font-weight: 700; font-size: var(--text-xl); line-height: 1.3; color: var(--text); margin: var(--space-50) 0 var(--space-30); }
+  h5 { font-weight: 700; font-size: var(--text-lg); line-height: 1.4; margin: var(--space-40) 0 var(--space-20); }
+  h6 { font-weight: 700; font-size: var(--text-base); line-height: 1.4; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin: var(--space-40) 0 var(--space-20); }
+  p { margin: 0 0 var(--space-40); }
+  a { color: var(--secondary-dark); }   /* NEW link rule */
+  a:hover { color: var(--primary); }     /* NEW hover rule */
+  code, pre { font-family: "JetBrains Mono", ui-monospace, monospace; }
+  code { background: var(--background-subtle); padding: 2px 6px; border-radius: var(--r-sm); font-size: 0.9em; }
+  pre { background: var(--code-bg); color: var(--code-text); padding: var(--space-40); border-radius: var(--r-md); overflow-x: auto; font-size: var(--text-sm); }
+
+  /* PALETTE */
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-40); }
+  .swatch { border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; background: #fff; }
+  .swatch-chip { height: 110px; }
+  .swatch-meta { padding: var(--space-30); font-size: var(--text-sm); }
+  .swatch-meta .name { font-weight: 700; color: var(--primary); }
+  .swatch-meta .hex { font-family: "JetBrains Mono", ui-monospace, monospace; color: var(--text-muted); }
+  .swatch-meta .role { color: var(--text-muted); margin-top: 4px; font-size: var(--text-sm); }
+  .new-badge { display: inline-block; background: var(--secondary); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: var(--r-full); letter-spacing: 0.05em; text-transform: uppercase; margin-left: 6px; }
+  .dep-badge { display: inline-block; background: var(--danger); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: var(--r-full); letter-spacing: 0.05em; text-transform: uppercase; margin-left: 6px; }
+  .flag { background: #fff3c4; border-left: 4px solid var(--danger); padding: var(--space-30) var(--space-40); margin: var(--space-40) 0; border-radius: var(--r-sm); font-size: var(--text-sm); color: #6b3a00; }
+  .flag strong { color: var(--danger); }
+  .lock { background: rgba(15, 118, 110, 0.10); border-left: 4px solid var(--accent-dark); padding: var(--space-30) var(--space-40); margin: var(--space-40) 0; border-radius: var(--r-sm); font-size: var(--text-sm); color: var(--text); }
+  .lock strong { color: var(--accent-dark); }
+
+  /* TYPE SCALE */
+  .type-row { display: grid; grid-template-columns: 130px 120px 1fr; align-items: baseline; gap: var(--space-40); padding: var(--space-30) 0; border-bottom: 1px dashed var(--border); }
+  .type-row.deprecated { opacity: 0.45; }
+  .type-row .slug { font-family: "JetBrains Mono", ui-monospace, monospace; font-weight: 700; color: var(--primary); }
+  .type-row .range { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: var(--text-sm); color: var(--text-muted); }
+  .type-row .sample { color: var(--text); font-weight: 400; line-height: 1.15; }
+
+  /* WEIGHTS */
+  .weight-row { display: grid; grid-template-columns: 100px 1fr; gap: var(--space-40); padding: var(--space-30) 0; border-bottom: 1px dashed var(--border); }
+  .weight-row .label { font-family: "JetBrains Mono", ui-monospace, monospace; color: var(--primary); font-weight: 700; }
+  .weight-row .demo { font-size: var(--text-2xl); line-height: 1.2; color: var(--text); }
+
+  /* SPACING */
+  .space-stack { display: flex; flex-direction: column; gap: var(--space-30); }
+  .space-bar { display: grid; grid-template-columns: 80px 1fr 80px; align-items: center; gap: var(--space-30); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: var(--text-sm); }
+  .space-bar .slug { color: var(--primary); font-weight: 700; }
+  .space-bar .bar { background: var(--primary); height: 16px; border-radius: var(--r-sm); }
+  .space-bar .px { color: var(--text-muted); text-align: right; }
+
+  /* RADII */
+  .radii-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-40); }
+  .radius-card { background: var(--primary); height: 120px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: var(--text-sm); font-weight: 700; text-align: center; }
+  .radius-card.new { background: var(--secondary); }
+  .radius-card.button { background: var(--accent-dark); }
+
+  /* BUTTONS — all use medium radius now (locked 2026-06-12) */
+  .btn { display: inline-block; font-family: Inter, sans-serif; font-weight: 600; font-size: var(--text-base); padding: var(--space-30) var(--space-50); border-radius: var(--r-md); border: 0; cursor: pointer; text-decoration: none; }
+  .btn-primary { background: var(--primary); color: var(--background); }
+  .btn-primary:hover { background: var(--primary-light); color: var(--background); }
+  .btn-secondary { background: var(--secondary); color: #fff; }
+  .btn-secondary:hover { background: var(--secondary-dark); color: #fff; }
+  .btn-ghost { background: transparent; color: var(--primary); border: 1px solid var(--border); }
+  .btn-ghost:hover { background: var(--background-subtle); color: var(--primary); }
+  .btn-row { display: flex; flex-wrap: wrap; gap: var(--space-30); align-items: center; }
+
+  /* COMPONENT DEMOS */
+  .card { background: var(--background-subtle); border: 1px solid var(--border); border-radius: var(--r-lg); padding: var(--space-50); }
+  .card.featured { border-radius: var(--r-xl); }
+  .card.pricing { border-radius: var(--r-2xl); background: var(--primary); color: var(--background); }
+  .card.pricing h3 { color: var(--background); }
+  .card.pricing a { color: var(--background); text-decoration: underline; }
+
+  blockquote {
+    margin: var(--space-40) 0;
+    padding-left: var(--space-50);
+    border-left: 4px solid var(--secondary);
+    color: var(--text);
+    font-style: normal;
+  }
+
+  /* Inline contrast badges */
+  .contrast-fail { background: rgba(220, 38, 38, 0.10); border-left: 3px solid var(--danger); padding: 6px 10px; font-size: var(--text-sm); font-family: "JetBrains Mono", ui-monospace, monospace; margin-top: 8px; }
+  .contrast-pass { background: rgba(20, 184, 166, 0.10); border-left: 3px solid var(--accent-dark); padding: 6px 10px; font-size: var(--text-sm); font-family: "JetBrains Mono", ui-monospace, monospace; margin-top: 8px; }
+  .non-text { background: rgba(15, 23, 42, 0.06); border-left: 3px solid var(--primary); padding: 6px 10px; font-size: var(--text-sm); font-family: "JetBrains Mono", ui-monospace, monospace; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="#palette">Palette</a>
+  <a href="#type">Type scale</a>
+  <a href="#weights">Weights</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#radii">Radii</a>
+  <a href="#headings">Headings</a>
+  <a href="#buttons">Buttons</a>
+  <a href="#components">Components</a>
+</nav>
+
+<div class="wrap">
+
+<section>
+  <h1>WP Block School — Style Guide</h1>
+  <p style="font-size: var(--text-lg); color: var(--text-muted);">Locked tokens from <code>.claude/design/DESIGN.md</code>. Reflects two rounds of evolution: <span class="new-badge">2026-06-11</span> Zen-inspired cream/charcoal/scale/radii. <span class="new-badge">2026-06-12</span> link rule locked, border re-tinted, button radius bumped, xs deprecated.</p>
+  <p>Page is rendered with the same self-hosted Inter + JetBrains Mono and the same CSS custom properties that ship via <code>theme.json</code>. What you see here is what WordPress will render.</p>
+</section>
+
+<section id="palette">
+  <h2>Palette</h2>
+  <div class="swatch-grid">
+
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #0f172a"></div>
+      <div class="swatch-meta">
+        <div class="name">primary</div>
+        <div class="hex">#0f172a</div>
+        <div class="role">Slate. Headlines, CTAs, focus rings, link hover.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #334155"></div>
+      <div class="swatch-meta">
+        <div class="name">primary-light</div>
+        <div class="hex">#334155</div>
+        <div class="role">Primary CTA hover.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #020617"></div>
+      <div class="swatch-meta">
+        <div class="name">primary-dark</div>
+        <div class="hex">#020617</div>
+        <div class="role">Active / pressed primary.</div>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #ea580c"></div>
+      <div class="swatch-meta">
+        <div class="name">secondary</div>
+        <div class="hex">#ea580c</div>
+        <div class="role">Burnt orange. Secondary-button bg, callouts, accent borders, UI fills.</div>
+        <div class="non-text">⛔ NOT for text/links on cream — 3.1:1 fails AA. Non-text only.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #fb923c"></div>
+      <div class="swatch-meta">
+        <div class="name">secondary-light</div>
+        <div class="hex">#fb923c</div>
+        <div class="role">Hover on secondary bg.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #9a3412"></div>
+      <div class="swatch-meta">
+        <div class="name">secondary-dark <span class="new-badge">link</span></div>
+        <div class="hex">#9a3412</div>
+        <div class="role">Body links (locked 2026-06-12). Active secondary CTA.</div>
+        <div class="contrast-pass">✓ 6.4:1 on cream — AA pass for all text.</div>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #14b8a6"></div>
+      <div class="swatch-meta">
+        <div class="name">accent</div>
+        <div class="hex">#14b8a6</div>
+        <div class="role">Teal. Success, module-complete.</div>
+        <div class="non-text">⚠ 3.0:1 on cream — large text/UI/icons only.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #5eead4"></div>
+      <div class="swatch-meta">
+        <div class="name">accent-light</div>
+        <div class="hex">#5eead4</div>
+        <div class="role">Light success bg.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #0f766e"></div>
+      <div class="swatch-meta">
+        <div class="name">accent-dark</div>
+        <div class="hex">#0f766e</div>
+        <div class="role">Active accent.</div>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #2e2e2e"></div>
+      <div class="swatch-meta">
+        <div class="name">text</div>
+        <div class="hex">#2e2e2e</div>
+        <div class="role">Warm charcoal body text.</div>
+        <div class="contrast-pass">✓ 12.7:1 on cream — AAA pass.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #475569"></div>
+      <div class="swatch-meta">
+        <div class="name">text-muted</div>
+        <div class="hex">#475569</div>
+        <div class="role">Captions, secondary text.</div>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #f2f0e3; border-bottom: 1px solid var(--border);"></div>
+      <div class="swatch-meta">
+        <div class="name">background</div>
+        <div class="hex">#f2f0e3</div>
+        <div class="role">Warm cream page bg.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #f5f5f4"></div>
+      <div class="swatch-meta">
+        <div class="name">background-subtle</div>
+        <div class="hex">#f5f5f4</div>
+        <div class="role">Cards, section bg.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #dcd5bf"></div>
+      <div class="swatch-meta">
+        <div class="name">border <span class="new-badge">new</span></div>
+        <div class="hex">#dcd5bf</div>
+        <div class="role">Light tan. Replaces grey #e7e5e4 that washed out on cream.</div>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #dc2626"></div>
+      <div class="swatch-meta">
+        <div class="name">danger</div>
+        <div class="hex">#dc2626</div>
+        <div class="role">Errors, warnings.</div>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #0f172a"></div>
+      <div class="swatch-meta">
+        <div class="name">code-bg</div>
+        <div class="hex">#0f172a</div>
+        <div class="role">Code block bg (= primary).</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-chip" style="background: #e2e8f0"></div>
+      <div class="swatch-meta">
+        <div class="name">code-text</div>
+        <div class="hex">#e2e8f0</div>
+        <div class="role">Code block text.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="lock" style="margin-top: var(--space-50);">
+    <strong>Link rule (locked 2026-06-12):</strong> body links use <code>secondary-dark</code> (#9a3412, 6.4:1 AA). Link hover → <code>primary</code> slate. <code>secondary</code> burnt-orange (#ea580c) is reserved for non-text use only: secondary-button backgrounds, callouts, accent borders, UI fills. Never as link/body text on cream.
+  </div>
+</section>
+
+<section id="type">
+  <h2>Type scale</h2>
+  <p>Fluid clamp, 17px root. Each row shows the slug, the size range (px @ 400vw → @ 1280vw), and a live sample at the current viewport.</p>
+
+  <div class="type-row deprecated"><div class="slug">xs <span class="dep-badge">deprecated</span></div><div class="range">12 → 14px</div><div class="sample" style="font-size: var(--text-xs)">Too small — do not use. Use sm.</div></div>
+  <div class="type-row"><div class="slug">sm</div><div class="range">14 → 17px</div><div class="sample" style="font-size: var(--text-sm)">The quick brown fox</div></div>
+  <div class="type-row"><div class="slug">base</div><div class="range">17 → 19px</div><div class="sample" style="font-size: var(--text-base)">The quick brown fox</div></div>
+  <div class="type-row"><div class="slug">lg</div><div class="range">19 → 23px</div><div class="sample" style="font-size: var(--text-lg)">The quick brown fox</div></div>
+  <div class="type-row"><div class="slug">xl</div><div class="range">21 → 28px</div><div class="sample" style="font-size: var(--text-xl)">The quick brown fox</div></div>
+  <div class="type-row"><div class="slug">2xl</div><div class="range">25 → 34px</div><div class="sample" style="font-size: var(--text-2xl)">The quick brown fox</div></div>
+  <div class="type-row"><div class="slug">3xl</div><div class="range">32 → 45px</div><div class="sample" style="font-size: var(--text-3xl)">The quick brown</div></div>
+  <div class="type-row"><div class="slug">4xl</div><div class="range">38 → 57px</div><div class="sample" style="font-size: var(--text-4xl); font-weight: 700;">The quick brown</div></div>
+  <div class="type-row"><div class="slug">5xl</div><div class="range">47 → 72px</div><div class="sample" style="font-size: var(--text-5xl); font-weight: 900; letter-spacing: -0.02em;">Page hero</div></div>
+  <div class="type-row"><div class="slug">6xl</div><div class="range">57 → 89px</div><div class="sample" style="font-size: var(--text-6xl); font-weight: 900; letter-spacing: -0.02em;">Sales hero</div></div>
+  <div class="type-row"><div class="slug">7xl</div><div class="range">70 → 111px</div><div class="sample" style="font-size: var(--text-7xl); font-weight: 900; letter-spacing: -0.02em;">Mega</div></div>
+</section>
+
+<section id="weights">
+  <h2>Weights</h2>
+  <p>Inter is shipped at 400 / 700 / 900 only. Per locked rule: H1 → 900, H2–H6 → 700, body → 400.</p>
+
+  <div class="weight-row"><div class="label">400</div><div class="demo" style="font-weight: 400;">Solid builders deserve a calm migration path.</div></div>
+  <div class="weight-row"><div class="label">400 italic</div><div class="demo" style="font-weight: 400; font-style: italic;">Solid builders deserve a calm migration path.</div></div>
+  <div class="weight-row"><div class="label">700</div><div class="demo" style="font-weight: 700;">Solid builders deserve a calm migration path.</div></div>
+  <div class="weight-row"><div class="label">700 italic</div><div class="demo" style="font-weight: 700; font-style: italic;">Solid builders deserve a calm migration path.</div></div>
+  <div class="weight-row"><div class="label">900</div><div class="demo" style="font-weight: 900;">Solid builders deserve a calm migration path.</div></div>
+</section>
+
+<section id="spacing">
+  <h2>Spacing</h2>
+  <p>10-token rem-direct scale. <code>spacingScale.steps: 0</code> in theme.json suppresses auto-generated steps; only these are surfaced in the Site Editor.</p>
+
+  <div class="space-stack">
+    <div class="space-bar"><div class="slug">10</div><div class="bar" style="width: var(--space-10)"></div><div class="px">0.25rem · 4px</div></div>
+    <div class="space-bar"><div class="slug">20</div><div class="bar" style="width: var(--space-20)"></div><div class="px">0.5rem · 8px</div></div>
+    <div class="space-bar"><div class="slug">30</div><div class="bar" style="width: var(--space-30)"></div><div class="px">0.75rem · 13px</div></div>
+    <div class="space-bar"><div class="slug">40</div><div class="bar" style="width: var(--space-40)"></div><div class="px">1rem · 17px</div></div>
+    <div class="space-bar"><div class="slug">50</div><div class="bar" style="width: var(--space-50)"></div><div class="px">1.5rem · 25px</div></div>
+    <div class="space-bar"><div class="slug">60</div><div class="bar" style="width: var(--space-60)"></div><div class="px">2rem · 34px</div></div>
+    <div class="space-bar"><div class="slug">70</div><div class="bar" style="width: var(--space-70)"></div><div class="px">3rem · 51px</div></div>
+    <div class="space-bar"><div class="slug">80</div><div class="bar" style="width: var(--space-80)"></div><div class="px">4rem · 68px</div></div>
+    <div class="space-bar"><div class="slug">90</div><div class="bar" style="width: var(--space-90)"></div><div class="px">5rem · 85px</div></div>
+    <div class="space-bar"><div class="slug">100</div><div class="bar" style="width: var(--space-100)"></div><div class="px">7rem · 119px</div></div>
+  </div>
+</section>
+
+<section id="radii">
+  <h2>Border radii</h2>
+  <p>4px → 24px ladder + full-pill. Buttons now use the 8px medium tier (was 4px). Teal-bordered tile = button radius.</p>
+
+  <div class="radii-grid">
+    <div class="radius-card" style="border-radius: var(--r-sm);">4px<br><span style="font-weight:400">sm</span></div>
+    <div class="radius-card button" style="border-radius: var(--r-md);">8px<br><span style="font-weight:400">md · BUTTON</span></div>
+    <div class="radius-card" style="border-radius: var(--r-lg);">12px<br><span style="font-weight:400">lg</span></div>
+    <div class="radius-card new" style="border-radius: var(--r-xl);">16px<br><span style="font-weight:400">xl · featured</span></div>
+    <div class="radius-card new" style="border-radius: var(--r-2xl);">24px<br><span style="font-weight:400">2xl · pricing</span></div>
+    <div class="radius-card" style="border-radius: var(--r-full);">full<br><span style="font-weight:400">pill</span></div>
+  </div>
+</section>
+
+<section id="headings">
+  <h2>Headings, body, links</h2>
+  <p>Rendered with the locked theme.json rules — H1 weight 900, H2–H6 weight 700, link color = <code>secondary-dark</code>.</p>
+
+  <h1>H1 — Page hero (5xl, weight 900)</h1>
+  <h2>H2 — Section heading (3xl, weight 700)</h2>
+  <h3>H3 — Subsection (2xl, weight 700)</h3>
+  <h4>H4 — Sub-subsection (xl, weight 700)</h4>
+  <h5>H5 — Aside heading (lg, weight 700)</h5>
+  <h6>H6 — Label (base, uppercase, muted)</h6>
+
+  <p>Body copy reads against the new cream background at 17–19px fluid. Most of the WP Block School site is body copy. You're reading the production body style right now: <strong>700-weight for emphasis</strong>, <em>italics for nuance</em>, and <a href="#">a link colored secondary-dark for navigation</a> — passes AA at 6.4:1 on cream. Hover this link to see the primary-slate hover state.</p>
+
+  <blockquote>
+    Block themes win when the design system is locked once and inherited everywhere. Stop fighting the page builder.
+  </blockquote>
+
+  <h3>Code</h3>
+  <p>Inline code looks like <code>register_block_pattern()</code> and renders in JetBrains Mono. A fenced block:</p>
+  <pre>add_action('init', function () {
+  register_block_pattern('wpbs/hero', [
+    'title'    => 'Hero',
+    'category' => 'wpbs',
+    'content'  =&gt; '&lt;!-- wp:heading --&gt;...',
+  ]);
+});</pre>
+</section>
+
+<section id="buttons">
+  <h2>Buttons</h2>
+  <p>Three variants. All use 600-weight Inter at base size, <strong>8px radius (medium, updated 2026-06-12 from 4px)</strong>.</p>
+
+  <div class="btn-row">
+    <a href="#" class="btn btn-primary">Primary CTA</a>
+    <a href="#" class="btn btn-secondary">Secondary CTA</a>
+    <a href="#" class="btn btn-ghost">Ghost / tertiary</a>
+  </div>
+
+  <p style="margin-top: var(--space-50);">Hover state:</p>
+  <div class="btn-row">
+    <a href="#" class="btn btn-primary" style="background: var(--primary-light);">Primary hover</a>
+    <a href="#" class="btn btn-secondary" style="background: var(--secondary-dark);">Secondary hover</a>
+    <a href="#" class="btn btn-ghost" style="background: var(--background-subtle);">Ghost hover</a>
+  </div>
+</section>
+
+<section id="components">
+  <h2>Component demos — new tokens in context</h2>
+
+  <h3>Default card (radius lg · 12px) — new tan border visible against cream</h3>
+  <div class="card">
+    <h4 style="margin-top:0">Module 03 — Pattern hardening</h4>
+    <p style="margin-bottom:0">Lock theme.json tokens before authoring patterns. Reduces drift between Local and VPS. <a href="#">Read the migration playbook</a>.</p>
+  </div>
+
+  <h3>Featured card (radius xl · 16px)</h3>
+  <div class="card featured">
+    <h4 style="margin-top:0">Get the 7-page diagnostic</h4>
+    <p>Drop your Elementor site URL. We'll return a slate of what to migrate first, what to leave, and what to delete entirely.</p>
+    <a href="#" class="btn btn-secondary" style="margin-top: var(--space-20);">Start diagnostic</a>
+  </div>
+
+  <h3>Pricing card (radius 2xl · 24px)</h3>
+  <div class="card pricing">
+    <h3 style="margin-top:0; color: var(--background);">Founding cohort</h3>
+    <p style="font-size: var(--text-6xl); font-weight: 900; line-height: 1; margin: var(--space-30) 0; color: var(--background); letter-spacing: -0.02em;">$199</p>
+    <p style="opacity: 0.85;">8 weeks. Migration playbooks, live office hours, the full pattern library.</p>
+    <a href="#" class="btn btn-secondary" style="margin-top: var(--space-30);">Join cohort #1</a>
+  </div>
+
+  <h3>Link rule demo</h3>
+  <div class="card">
+    <p style="margin-bottom:0">Body links now render as <code>secondary-dark</code> (#9a3412): <a href="#">this link passes AA at 6.4:1 on cream</a>. Hover it to see the slate-primary active state. The bright burnt-orange (<code>secondary</code> #ea580c) is reserved for non-text use only — see the secondary CTA button above + the orange-bordered blockquote.</p>
+  </div>
+</section>
+
+<section>
+  <h2>What's not in this preview</h2>
+  <ul>
+    <li>Dark theme — deferred to v2 per locked decision. Cohort #1 ships light only.</li>
+    <li>Brand assets (logo lockup, mark) — preview rendered separately in patterns + header/footer.</li>
+    <li>Sensei-specific course UI — inherits these tokens automatically.</li>
+  </ul>
+  <p style="color: var(--text-muted); font-size: var(--text-sm);">Source: <code>.claude/design/DESIGN.md</code> · Last updated 2026-06-12. Reference design saved at <code>~/.claude/designs/zen-browser/</code>.</p>
+</section>
+
+</div>
+</body>
+</html>

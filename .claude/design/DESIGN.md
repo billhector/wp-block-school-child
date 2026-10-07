@@ -43,17 +43,17 @@ Indie-tech feel. Anti-corporate. Reads as "serious solo builder" not "enterprise
 | `primary` | `#0f172a` | Slate near-black. Headlines, primary CTAs, focus rings |
 | `primary-light` | `#334155` | Hover states on primary, light backgrounds |
 | `primary-dark` | `#020617` | Active states, dark accents |
-| `secondary` | `#ea580c` | Burnt orange. Links, secondary CTAs, callouts, energy |
+| `secondary` | `#ea580c` | Burnt orange. Secondary-button backgrounds, callouts, UI fills, accent borders. **NOT for text/links** — see Link rule in notes. |
 | `secondary-light` | `#fb923c` | Hover on secondary, light callout backgrounds |
-| `secondary-dark` | `#9a3412` | Active secondary CTA |
+| `secondary-dark` | `#9a3412` | Body links (locked 2026-06-12). Active secondary CTA. |
 | `accent` | `#14b8a6` | Teal. Success states, module-complete checks, positive UI |
 | `accent-light` | `#5eead4` | Light success backgrounds |
 | `accent-dark` | `#0f766e` | Success active |
-| `text` | `#1e293b` | Body text (slate-800) |
+| `text` | `#2e2e2e` | Body text (warm charcoal — Zen-inspired, replaces slate-800) |
 | `text-muted` | `#475569` | Secondary text, captions |
-| `background` | `#fafaf9` | Warm white page background |
+| `background` | `#f2f0e3` | Warm cream page background (Zen-inspired, replaces warm white) |
 | `background-subtle` | `#f5f5f4` | Card / section background |
-| `border` | `#e7e5e4` | Subtle borders, dividers |
+| `border` | `#dcd5bf` | Light tan borders, dividers (replaces grey #e7e5e4 that washed out on cream) |
 | `danger` | `#dc2626` | Errors, warnings |
 | `code-bg` | `#0f172a` | Code block background (slate, matches primary) |
 | `code-text` | `#e2e8f0` | Code block text |
@@ -61,9 +61,10 @@ Indie-tech feel. Anti-corporate. Reads as "serious solo builder" not "enterprise
 **Notes:**
 - Default WP palette + duotones + gradients disabled in `theme.json` (`defaultPalette: false`) so the Site Editor only surfaces these tokens.
 - Light/dark variants computed as fixed hex (not `color-mix()`) so they survive in non-modern-browser fallbacks.
-- Primary slate is dark enough for CTAs against warm white background (contrast ratio 17:1).
-- Secondary burnt orange on warm white = 4.7:1 (AA pass for normal text, AAA for large text).
-- Accent teal on warm white = 3.1:1 (AA pass for large text only; use for icons/borders/UI only, not body links).
+- Body text `#2e2e2e` on cream `#f2f0e3` = ~12.7:1 (AAA pass for normal text).
+- Primary slate `#0f172a` on cream still ~17:1 (AAA, plenty of headroom for CTAs).
+- **Link rule (locked 2026-06-12):** body links use `secondary-dark` `#9a3412` (~6.4:1 on cream, AA pass for all text). `secondary` `#ea580c` is reserved for non-text use — secondary-button backgrounds, callouts, accent borders, UI fills. Never as link/body text on cream. Link hover → `primary` slate for clear active feedback.
+- Accent teal `#14b8a6` on cream `#f2f0e3` = ~3.0:1 (AA pass for large text only; use for icons/borders/UI, not body links).
 
 **Dark mode:** Deferred to v2. Sales page + course content ship light-mode-only for cohort #1.
 
@@ -110,8 +111,8 @@ Encoded in `theme.json` `settings.typography.fontSizes`. Clamp between viewport 
 
 | Slug | clamp() | Approx range | Element use |
 |---|---|---|---|
-| `xs` | `clamp(0.75rem, 0.71rem + 0.18vw, 0.875rem)` | 12–14px | Captions, badges |
-| `sm` | `clamp(0.875rem, 0.83rem + 0.21vw, 1rem)` | 14–17px | Secondary text, code |
+| `xs` | `clamp(0.75rem, 0.71rem + 0.18vw, 0.875rem)` | 12–14px | **DEPRECATED 2026-06-12 — DO NOT USE.** Too small. Token defined for safety only. Use `sm` (14–17px) for captions/badges instead. |
+| `sm` | `clamp(0.875rem, 0.83rem + 0.21vw, 1rem)` | 14–17px | Captions, badges, code, secondary text |
 | `base` | `clamp(1rem, 0.95rem + 0.24vw, 1.125rem)` | 17–19px | Body |
 | `lg` | `clamp(1.125rem, 1.05rem + 0.36vw, 1.375rem)` | 19–23px | Lead paragraph, H5 |
 | `xl` | `clamp(1.25rem, 1.13rem + 0.59vw, 1.625rem)` | 21–28px | H4 |
@@ -119,6 +120,8 @@ Encoded in `theme.json` `settings.typography.fontSizes`. Clamp between viewport 
 | `3xl` | `clamp(1.875rem, 1.55rem + 1.62vw, 2.625rem)` | 32–45px | H2 |
 | `4xl` | `clamp(2.25rem, 1.78rem + 2.35vw, 3.375rem)` | 38–57px | Section hero |
 | `5xl` | `clamp(2.75rem, 2.08rem + 3.35vw, 4.25rem)` | 47–72px | Page H1 |
+| `6xl` | `clamp(3.375rem, 2.55rem + 4.11vw, 5.25rem)` | 57–89px | Sales-page hero |
+| `7xl` | `clamp(4.125rem, 3.12rem + 5.02vw, 6.5rem)` | 70–111px | Mega hero / display |
 
 **Line height:**
 - Body: 1.6
@@ -159,9 +162,11 @@ Encoded in `theme.json` `settings.spacing.spacingSizes`. Custom-rem-based.
 
 | Token | px | Use |
 |---|---|---|
-| Radius small | `4px` | Buttons, badges, small inputs |
-| Radius medium | `8px` | Cards, callouts, code blocks |
+| Radius small | `4px` | Badges, small inputs (NOT buttons — buttons use medium) |
+| Radius medium | `8px` | Buttons (updated 2026-06-12 from 4px), cards, callouts, code blocks |
 | Radius large | `12px` | Hero containers, large cards |
+| Radius xl | `16px` | Featured cards, hero blocks (Zen-inspired) |
+| Radius 2xl | `24px` | Very rounded feature blocks, pricing cards (Zen-inspired) |
 | Radius full | `9999px` | Pills, avatars |
 
 (These aren't yet encoded in theme.json — added per-block as needed.)
@@ -179,10 +184,10 @@ All built natively with WordPress blocks + `theme.json` tokens. No custom React.
 
 theme.json defaults:
 - Background: `primary` (slate)
-- Text: `background` (warm white)
+- Text: `background` (warm cream)
 - Padding: `--wp--preset--spacing--30` top/bottom, `--wp--preset--spacing--50` left/right
 - Font weight: 600
-- Border radius: 4px (`small` radius)
+- Border radius: 8px (`medium` radius — updated 2026-06-12 from 4px for a slightly softer feel)
 - Hover: background `primary-light`
 
 ### Headings
@@ -196,8 +201,8 @@ theme.json defaults:
 
 ### Links (core elements/link)
 
-- Color: `secondary` (burnt orange)
-- Hover: `secondary-dark`
+- Color: `secondary-dark` (`#9a3412`) — 6.4:1 on cream, AA pass (updated 2026-06-12 from `secondary` which dropped to 3.1:1 on the new cream bg)
+- Hover: `primary` (slate near-black) — clear active feedback
 - Underline: default WP behavior
 
 ### Code blocks (core/code, core/preformatted)
@@ -211,7 +216,7 @@ theme.json defaults:
 
 ### Quote (core/quote)
 
-- Left border: 4px solid `secondary` (burnt orange)
+- Left border: 4px solid `secondary` (burnt orange — this is a non-text decorative use, contrast does not apply)
 - Padding-left: spacing `50`
 - Font style: normal (no italic — Inter italics under-perform)
 
@@ -223,7 +228,7 @@ theme.json defaults:
 
 - Course Theme defaults inherited. Color tokens (slate / orange / teal) bleed through automatically since theme.json palette is parent-overridable.
 - Module-complete checkmark uses `accent` (teal).
-- Lesson list bullets use `secondary` (orange).
+- Lesson list bullets use `secondary` (orange — non-text decorative, OK).
 
 ## Brand mark + wordmark
 
@@ -247,7 +252,7 @@ Favicons: PNG/ICO stack in `assets/icons/` only — no SVG favicon (v1 `favicon.
 
 - **Text:** WP BLOCK SCHOOL (always uppercase)
 - **Font:** Inter 900
-- **Color:** `primary` (#0f172a slate) on light bg; `background` (#fafaf9 warm white) on dark bg
+- **Color:** `primary` (#0f172a slate) on light bg; `background` (#f2f0e3 warm cream) on dark bg
 - **Tracking:** `-0.01em` (header) / `-0.02em` (display sizes / footer hero)
 - **Layout:** inline single-line in header nav; stacked 3-line in footer hero treatment
 - **Rendered, not imaged:** the wordmark is set in live Inter via `core/site-title` block. Do NOT use a wordmark SVG/PNG — the live type stays crisp at every size and inherits the type system.
@@ -335,3 +340,5 @@ You can invoke these via the Skill tool when needed:
 - `2026-06-09` — Initial lock. Palette: Slate + Burnt Orange + Teal. Type: Inter + JetBrains Mono. Spacing + radii defined. Child theme `wp-block-school-child` created with `theme.json` wiring these tokens.
 - `2026-06-09` (update) — Replaced TTF + fontsource downloads with Bill's static woff2 set (Inter 400/400i/700/700i/900 + JetBrains Mono 400, all latin subset, ~144KB total). Heading weight rule locked: H1 = 900, H2–H6 = 700.
 - `2026-06-09` (brand mark) — Locked wordmark (WP BLOCK SCHOOL uppercase, Inter 900, type-rendered not imaged) + mark (3×3 grid, 8 slate + center orange, 4px corner radius). Files in `assets/brand/`: `mark.svg`, `mark-dark.svg`, `favicon.svg`. Favicon wired via functions.php `wp_head` action. Header now shows mark + wordmark lockup; footer keeps wordmark-only.
+- `2026-06-11` (zen-inspired evolution, partial) — Background `#fafaf9` → `#f2f0e3` (warm cream). Body text `#1e293b` → `#2e2e2e` (warm charcoal). Added type-scale tiers `6xl` (57–89px) + `7xl` (70–111px) for sales-page hero copy. Added radii tiers `xl` (16px) + `2xl` (24px) for featured cards. **Open:** secondary burnt-orange `#ea580c` contrast drops to 3.1:1 on new cream bg — pending orange-token evolution (next session). Reference: `~/.claude/designs/zen-browser/`.
+- `2026-06-12` (round 2) — Border `#e7e5e4` → `#dcd5bf` (light tan, visible against cream — grey washed out). Button radius `4px` → `8px` (medium tier — slightly softer feel). Type token `xs` (12–14px) marked DEPRECATED (too small); keep defined for safety but no styling consumes it. Orange contrast resolved: links → `secondary-dark` `#9a3412` (~6.4:1 AA), link hover → `primary`; `secondary` `#ea580c` reserved for non-text use (button bg, callouts, accent borders, decorative).
